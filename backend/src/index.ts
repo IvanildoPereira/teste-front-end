@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import session from "express-session";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -14,6 +15,21 @@ app.use(cors({
 
 // Passing the body to json
 app.use(express.json());
+
+// Session
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET!,
+        saveUninitialized: false,
+        resave: true,
+        cookie: {
+            sameSite: "none",
+            httpOnly: true,
+            maxAge: parseInt(process.env.SESSION_MAX_AGE!),
+        },
+        
+    })
+)
 
 // Routes
 
