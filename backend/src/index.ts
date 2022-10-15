@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import * as dotenv from 'dotenv';
+import { userAuthRouter } from "./routes/userAuthRouter";
 dotenv.config();
 
 const app = express();
@@ -32,5 +33,6 @@ app.use(
 )
 
 // Routes
+app.use('/users/', userAuthRouter);
 
 app.listen(process.env.PORT || 3000);
