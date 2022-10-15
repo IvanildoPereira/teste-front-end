@@ -19,8 +19,8 @@ const Header = ({name, email}: UserAuth) =>{
                 {email}
               </Typography>
             </div>
-            <Button color="inherit" onClick={auth.logout}>
-              <ExitToApp fontSize="large"/>
+            <Button color="inherit" onClick={auth.logout} aria-label="Logout">
+              <ExitToApp fontSize="large" aria-label="Logout Door"/>
             </Button>
           </Toolbar>
         </AppBar>

@@ -18,7 +18,7 @@ const VideoCard = ({id, thumbnail, title, description }: Video) =>{
                     {title}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                    {description}
+                    {description.length > 0 ? description : "This video has no description!" }
                 </Typography>
             </CardVideoDetail>
             <CardActions>

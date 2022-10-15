@@ -36,11 +36,12 @@ const Search = ({ defaultValue, placeholder, onSearch, isActiveAnimation }: sear
                     value={searchText}
                     error = {errorSearchText ? true : false}
                     placeholder={placeholder}
+                    aria-label={"search"}
                     onChange={(e)=> setSearchText(e.target.value)}
                     style={{color: 'rgba(0, 0, 0, 0.6)', fontSize: '1.1rem', flex: 1}}
                     disableUnderline
                 />
-                <SearchButton color='primary' variant="contained" onClick={handleSearch}>
+                <SearchButton color='primary' variant="contained" onClick={handleSearch} aria-label="Search Term">
                     <SearchRounded />
                 </SearchButton>
             </Box>

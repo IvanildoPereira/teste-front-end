@@ -6,7 +6,7 @@ type LoadingSpinnerProps = {
 
 const LoadingSpinner = ({color}: LoadingSpinnerProps) =>{
     return(
-        <LoadingSpinnerContainer>
+        <LoadingSpinnerContainer aria-label="Loading">
             <Spinner color={color || "red"}>
                 <div className="rect1"></div>
                 <div className="rect2"></div>
