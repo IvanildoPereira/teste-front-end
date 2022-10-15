@@ -1,6 +1,62 @@
+import { Button, Typography } from '@material-ui/core';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import { aspect } from '../../types/AspectRatio';
+import Video from '../../types/Video';
+import ResponsiveVideoIframe from './components/ResponsiveVideoIframe';
+import VideoNotFounded from './components/VideoNotFounded';
+import VideoStatistic from './components/VideoStatistic';
+
 const DetailsPage = () => {
+  const [video, setVideo] = useState<Video | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
+
+  let navigate = useNavigate();
+
+  useEffect(() =>{
+    
+    const getVideoById = async() =>{
+      const response = await axios(`http://localhost:5000/video/${id}`);
+      if(response.data && response.data.video){
+        setVideo(response.data.video);
+      }
+      setIsLoading(false)
+    }
+
+    getVideoById();
+  }, [id])
+
   return (
-    <div>Details Page</div>
+    <>
+    {!isLoading && video &&
+      <div>
+        <Typography variant="h4">
+          {video.title}
+        </Typography>
+        <ResponsiveVideoIframe src = {`https://www.youtube.com/embed/${id}`} aspectRatio={aspect["16:9"]}/>
+          {video.videoStatistics && <VideoStatistic views={video.videoStatistics.views} likes = {video.videoStatistics.likes}/>}
+        <Typography>
+          {video.description}
+        </Typography>
+
+        <Button 
+          onClick={()=> navigate(-1)}
+          color='primary' 
+          variant="contained"
+          style={{marginTop: 20, marginBottom: 20}}
+        >
+          Go Back
+        </Button>
+      </div>
+    }
+    {isLoading && <LoadingSpinner color='#3f51b5'/>}
+    {!isLoading && !video && (
+      <VideoNotFounded />
+    )}
+    </>
   )
 }
 
