@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@material-ui/core";
 import { forwardRef, Ref } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Video from "../../../types/Video";
 
@@ -9,6 +9,8 @@ type VideoCardProps = {
 }
 
 const VideoCard = forwardRef(({video}: VideoCardProps, ref: Ref<IntersectionObserver> | null) =>{
+    const { pathname } = useLocation();
+    
     let navigate = useNavigate();
     return(
         <Grid item xs = {12} sm = {12} md = {6} lg = {4}>
@@ -28,7 +30,9 @@ const VideoCard = forwardRef(({video}: VideoCardProps, ref: Ref<IntersectionObse
                     </Typography>
                 </CardVideoDetail>
                 <CardActions>
-                    <Button size="small" onClick={()=> navigate(`/video/${video.id}`)} color='primary' variant="contained" fullWidth>Watch Video</Button>
+                    <Button size="small" onClick={()=> navigate(`/video/${video.id}`,{
+                        state: { previousPath: pathname }
+                    })} color='primary' variant="contained" fullWidth>Watch Video</Button>
                 </CardActions>
             </Card>
         </Grid>

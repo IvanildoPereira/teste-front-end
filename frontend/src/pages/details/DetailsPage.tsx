@@ -1,7 +1,7 @@
 import { Button, Typography } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { To, useLocation, useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { aspect } from '../../types/AspectRatio';
 import Video from '../../types/Video';
@@ -12,12 +12,13 @@ import VideoStatistic from './components/VideoStatistic';
 const DetailsPage = () => {
   const [video, setVideo] = useState<Video | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { state } = useLocation();
   const { id } = useParams();
 
   let navigate = useNavigate();
 
   useEffect(() =>{
-    
+    console.log(state?.previousPath)
     const getVideoById = async() =>{
       const response = await axios(`http://localhost:5000/video/${id}`);
       if(response.data && response.data.video){
@@ -43,7 +44,7 @@ const DetailsPage = () => {
         </Typography>
 
         <Button 
-          onClick={()=> navigate(-1)}
+          onClick={()=> navigate(state?.previousPath ? -1 as To : "/")}
           color='primary' 
           variant="contained"
           style={{marginTop: 20, marginBottom: 20}}
