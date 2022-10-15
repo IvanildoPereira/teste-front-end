@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { useCallback, useRef } from "react";
+import styled from "styled-components";
 import Video from "../../../types/Video";
 import VideoCard from "./VideoCard";
 
@@ -18,30 +19,23 @@ const VideoList = ({videos, hasNext, loading, changeToNextPageNumber}: VideoList
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
           if (entries[0].isIntersecting && hasNext) {
-            changeToNextPageNumber()
+            changeToNextPageNumber();
           }
         })
         if (node) observer.current.observe(node)
-      }, [loading, hasNext]);
+      }, [loading, hasNext, changeToNextPageNumber]);
 
     return (
-        <Grid container spacing={3} style = {{paddingTop: "14vh"}}>
-            {videos && videos.map((video: Video, index) => {
-            if (videos.length === index + 1) {
-                return (
-                    <Grid item key={index} xs = {12} sm = {12} md = {6} lg = {4} ref={lastVideoElementRef}>
-                        <VideoCard id = {video.id}  thumbnail = {video.thumbnail} title = {video.title} description = {video.description}/>  
-                    </Grid>
-                )}
-            else {
-                return (
-                    <Grid item key={index} xs = {12} sm = {12} md = {6} lg = {4}>
-                        <VideoCard id = {video.id} thumbnail = {video.thumbnail} title = {video.title} description = {video.description}/>
-                    </Grid>
-                )}
-            })}
-        </Grid>
+        <GridContainer container spacing={3}>
+            {videos && videos.map((video: Video, index) => 
+                <VideoCard key={index} ref={videos.length === index + 1 ? lastVideoElementRef : null} video = {video}/>  
+            )}
+        </GridContainer>
     )
 }
+
+const GridContainer = styled(Grid)`
+    padding-top: 125px;
+`
 
 export default VideoList;
