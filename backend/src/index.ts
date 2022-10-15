@@ -37,4 +37,9 @@ app.use(
 app.use('/users/', userAuthRouter);
 app.use("/video/", videoRouter);
 
+// Route doesn't exist
+app.use((req, res, next) => {
+    res.status(404).json("Requested route don't exist!")
+});
+
 app.listen(process.env.PORT || 3000);
