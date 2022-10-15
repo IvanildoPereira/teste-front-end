@@ -1,32 +1,39 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@material-ui/core";
+import { forwardRef, Ref } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Video from "../../../types/Video";
 
-const VideoCard = ({id, thumbnail, title, description }: Video) =>{
+type VideoCardProps = {
+    video: Video
+}
+
+const VideoCard = forwardRef(({video}: VideoCardProps, ref: Ref<IntersectionObserver> | null) =>{
     let navigate = useNavigate();
     return(
-        <Card>
-            <CardMedia
-                component="img"
-                height="200"
-                image={thumbnail}
-                alt="Thumbnail of the video"
-            />
-            <CardVideoDetail>
-                <Typography gutterBottom variant="subtitle1" component="h3">
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                    {description.length > 0 ? description : "This video has no description!" }
-                </Typography>
-            </CardVideoDetail>
-            <CardActions>
-                <Button size="small" onClick={()=> navigate(`/video/${id}`)} color='primary' variant="contained" fullWidth>Watch Video</Button>
-            </CardActions>
-        </Card>
+        <Grid item xs = {12} sm = {12} md = {6} lg = {4}>
+            <Card ref = {ref}>
+                <CardMedia
+                    component="img"
+                    height="200"
+                    image={video.thumbnail}
+                    alt="Thumbnail of the video"
+                />
+                <CardVideoDetail>
+                    <Typography gutterBottom variant="subtitle1" component="h3">
+                        {video.title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                        {video.description.length > 0 ? video.description : "This video has no description!" }
+                    </Typography>
+                </CardVideoDetail>
+                <CardActions>
+                    <Button size="small" onClick={()=> navigate(`/video/${video.id}`)} color='primary' variant="contained" fullWidth>Watch Video</Button>
+                </CardActions>
+            </Card>
+        </Grid>
     )
-}
+})
 
 const CardVideoDetail = styled(CardContent)`
     min-height: 160px;
