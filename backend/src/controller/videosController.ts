@@ -5,6 +5,12 @@ import Video from "../models/Video";
 import { VideoStatistics } from "../models/VideoStatistics";
 dotenv.config()
 
+type paramsProps = {
+    q: string,
+    maxResults: number,
+    pageToken?: string
+}
+
 const getVideo = async (req: Request, res: Response) => {
     let { videoId } = req.params;
     let response = await axios({
@@ -32,6 +38,43 @@ const getVideo = async (req: Request, res: Response) => {
     else res.json({error: "Video not founded!"});
 }
 
+const getVideos = async (req: Request, res: Response) => {
+    let {name, nextPageToken, maxResults} = req.query;
+    let videosList: Video[] = [];
+
+    let params: paramsProps = {
+        q: name as string || "",
+        maxResults: parseInt(maxResults as string) || 10,
+    }
+
+    if(nextPageToken){
+        params.pageToken = nextPageToken as string;
+    }
+
+    let response = await axios({
+        method: 'GET',
+        url: `https://www.googleapis.com/youtube/v3/search?part=id,snippet&key=${process.env.YOUTUBE_API_KEY}`,
+        params
+    });
+    if(response.data && response.data.items.length > 0){
+        response.data.items.map((item: any) => {
+            let video = new Video(
+                item.id.videoId,
+                item.snippet.thumbnails.high.url,
+                item.snippet.title,
+                item.snippet.description,
+
+            )
+            videosList.push(video);
+        })
+        res.json({videos: videosList, nextPageToken: response.data.nextPageToken})
+    }
+    else{
+        res.json({error: "cant find any"})
+    }
+}
+
 export {
     getVideo,
+    getVideos
 }
