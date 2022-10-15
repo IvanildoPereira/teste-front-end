@@ -20,11 +20,13 @@ const App = () => {
 
   if(user){
     routes = (
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/video/:id" element={<DetailsPage/>} />
-        <Route path="/*" element={<Navigate to = "/"/>} />
-      </Routes>
+      <Container style={{marginTop: 80}}>
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/video/:id" element={<DetailsPage/>} />
+          <Route path="/*" element={<Navigate to = "/"/>} />
+        </Routes>
+     </Container>
     )
   }else{
     routes = (
@@ -38,13 +40,9 @@ const App = () => {
   return (
     <AuthContext.Provider value={{ isLoggedIn: !!user, user, login: login, logout: logout}}>
       <Router>
-        {user && 
-          <Header name = {user.name} email = {user.email}/>
-        }
-        <Container>
-          {isLoading && <LoadingSpinner/>}
-          {!isLoading && routes}
-        </Container>
+        {user && <Header name = {user.name} email = {user.email}/>}
+        {isLoading && <LoadingSpinner/>}
+        {!isLoading && routes}
       </Router> 
       <GlobalStyles/>
     </AuthContext.Provider>
