@@ -18,7 +18,7 @@ export const useAuth = () => {
 
   // Logout
   const logout = useCallback(async() => {
-    await axios("http://localhost:5000/users/logout", {
+    await axios(`${process.env.BACKEND_FOR_FRONTEND}/users/logout`, {
       withCredentials: true
     })
     setUser(null);
@@ -38,7 +38,7 @@ export const useAuth = () => {
   // Auto Login
   useEffect(() =>{
     const getUser = async() =>{
-      const response = await axios.get("http://localhost:5000/users/login",{
+      const response = await axios.get(`${process.env.BACKEND_FOR_FRONTEND}/users/login`,{
         withCredentials: true
       });
       

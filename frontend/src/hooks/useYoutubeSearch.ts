@@ -20,7 +20,7 @@ export default function useYoutubeSearch(query: string, pageNumber: number) {
     let cancel: () => void;
     axios({
       method: 'GET',
-      url: 'http://localhost:5000/video/all',
+      url: `${process.env.BACKEND_FOR_FRONTEND}/video/all`,
       params: { name: query, nextPageToken, maxResults: 15},
       cancelToken: new axios.CancelToken(c => cancel = c)
     }).then(res => {
