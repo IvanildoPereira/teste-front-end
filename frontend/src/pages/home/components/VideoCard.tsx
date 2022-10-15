@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import Video from "../../../types/Video";
 
 const VideoCard = ({id, thumbnail, title, description }: Video) =>{
@@ -12,19 +13,33 @@ const VideoCard = ({id, thumbnail, title, description }: Video) =>{
                 image={thumbnail}
                 alt="Thumbnail of the video"
             />
-                <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">
+            <CardVideoDetail>
+                <Typography gutterBottom variant="subtitle1" component="h3">
                     {title}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                     {description}
                 </Typography>
-            </CardContent>
+            </CardVideoDetail>
             <CardActions>
                 <Button size="small" onClick={()=> navigate(`/video/${id}`)} color='primary' variant="contained" fullWidth>Watch Video</Button>
             </CardActions>
         </Card>
     )
 }
+
+const CardVideoDetail = styled(CardContent)`
+    min-height: 160px;
+
+    h3{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-clamp: 2; 
+        -webkit-box-orient: vertical;
+    }
+
+`;
 
 export default VideoCard;
