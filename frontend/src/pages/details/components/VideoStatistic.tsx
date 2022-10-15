@@ -1,6 +1,7 @@
 import { Box } from "@material-ui/core";
 import { ThumbUp, Visibility } from "@material-ui/icons";
 import styled from "styled-components";
+import { abbreviateNumber } from "../../../utils/abbreviateNumber";
 
 type VideoStatisticProps = {
     views: number,
@@ -11,10 +12,10 @@ const VideoStatistic = ({views, likes}: VideoStatisticProps) =>{
     return (
         <StatisticContainer>  
             <Box className="item">
-                <Visibility/> <span>{views}</span>
+                <Visibility/> <span>{abbreviateNumber(views)}</span>
             </Box>
             <Box className="item">
-                <ThumbUp/> <span>{likes}</span>
+                <ThumbUp/> <span>{abbreviateNumber(likes)}</span>
             </Box>
         </StatisticContainer>
     )
