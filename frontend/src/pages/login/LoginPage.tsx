@@ -28,7 +28,7 @@ const LoginPage = () => {
       email: email.trim()
     });
 
-    const response = await axios.post(`${process.env.BACKEND_FOR_FRONTEND}/users/login`, body, {
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND}/users/login`, body, {
       headers: {
         "Content-Type": "application/json"
       },
