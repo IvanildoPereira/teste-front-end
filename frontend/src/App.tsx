@@ -12,6 +12,7 @@ import Header from './layouts/Header';
 import DetailsPage from './pages/details/DetailsPage';
 import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/login/LoginPage';
+import GlobalStyles from './styles/GlobalStyles';
 
 const App = () => {  
   const { login, logout, user, isLoading } = useAuth();
@@ -45,6 +46,7 @@ const App = () => {
           {!isLoading && routes}
         </Container>
       </Router> 
+      <GlobalStyles/>
     </AuthContext.Provider>
   );
 }
