@@ -8,6 +8,7 @@ import {
 import LoadingSpinner from './components/LoadingSpinner';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hooks';
+import Header from './layouts/Header';
 import DetailsPage from './pages/details/DetailsPage';
 import HomePage from './pages/home/HomePage';
 import LoginPage from './pages/login/LoginPage';
@@ -37,7 +38,7 @@ const App = () => {
     <AuthContext.Provider value={{ isLoggedIn: !!user, user, login: login, logout: logout}}>
       <Router>
         {user && 
-        <div>header</div>
+          <Header name = {user.name} email = {user.email}/>
         }
         <Container>
           {isLoading && <LoadingSpinner/>}
