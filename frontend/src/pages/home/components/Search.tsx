@@ -41,7 +41,7 @@ const Search = ({ defaultValue, placeholder, onSearch, isActiveAnimation }: sear
                     style={{color: 'rgba(0, 0, 0, 0.6)', fontSize: '1.1rem', flex: 1}}
                     disableUnderline
                 />
-                <SearchButton color='primary' variant="contained" onClick={handleSearch} aria-label="Search Term">
+                <SearchButton color='primary' variant="contained" onClick={handleSearch} aria-label="Search Term" disableElevation>
                     <SearchRounded />
                 </SearchButton>
             </Box>
@@ -52,27 +52,26 @@ const Search = ({ defaultValue, placeholder, onSearch, isActiveAnimation }: sear
 
 const skateInTop = keyframes`
     0%{transform:translate(-50%,-50%)}
-    100%{transform:translate(-50%, -40vh)}
+    100%{transform:translateX(-50%) translateY(calc(-50vh + 100px))}
 `;
 
 const CardSearch = styled.div<animationProps>`
     position: absolute;
-    top: 40vh;
+    top: calc(50vh - 60px);
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
     padding-left: 20px;
-    height: 65px;
+    height: 60px;
     background-color: #f5f5f5;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    margin: 30px 0;
     animation: ${props => props.isActive ? "" : skateInTop} ${skateInTop} 0.7s ease-in-out;
     animation-fill-mode: forwards;
 
 `
 
 const SearchButton = styled(Button)`
-    height: 64px;
+    height: 60px;
 `
 
 export default Search
