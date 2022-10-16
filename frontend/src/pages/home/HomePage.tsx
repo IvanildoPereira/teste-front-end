@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -55,8 +56,8 @@ const HomePage = () => {
           hasNext = {!!nextPageToken} 
           changeToNextPageNumber = {handleChangePage}/>
       }      
-      <div>{loading && <LoadingSpinner color='#3f51b5'/>}</div>
-      <div>{error && 'Error'}</div>
+      {loading && <LoadingSpinner color='#3f51b5'/>}
+      <Typography align='center' color = "error">{!!error && error}</Typography>
     </div>
   )
 }
