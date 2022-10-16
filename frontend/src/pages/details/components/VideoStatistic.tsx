@@ -12,10 +12,10 @@ const VideoStatistic = ({views, likes}: VideoStatisticProps) =>{
     return (
         <StatisticContainer>  
             <Box className="item">
-                <Visibility aria-label="views"/> <span>{abbreviateNumber(views)} views</span>
+                <Visibility aria-label="views" color="primary"/> <span>{abbreviateNumber(views)} views</span>
             </Box>
             <Box className="item">
-                <ThumbUp aria-label="Number of Likes"/> <span>{abbreviateNumber(likes)}</span>
+                <ThumbUp aria-label="Number of Likes" color="primary"/> <span>{abbreviateNumber(likes)}</span>
             </Box>
         </StatisticContainer>
     )
@@ -24,7 +24,7 @@ const VideoStatistic = ({views, likes}: VideoStatisticProps) =>{
 const StatisticContainer = styled(Box)`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin: 10px 0;
 
     .item{
         display: flex;
