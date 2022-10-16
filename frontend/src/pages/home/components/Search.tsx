@@ -1,4 +1,4 @@
-import { Box, Button, FormHelperText, Input } from "@material-ui/core"
+import { Box, Button, Input, Typography } from "@material-ui/core"
 import {SearchRounded} from "@material-ui/icons"
 import { useState } from "react"
 import styled, { keyframes } from "styled-components"
@@ -45,7 +45,7 @@ const Search = ({ defaultValue, placeholder, onSearch, isActiveAnimation }: sear
                     <SearchRounded />
                 </SearchButton>
             </Box>
-            {errorSearchText && <FormHelperText id="component-error-text">{errorSearchText}</FormHelperText>}
+            {errorSearchText &&  <Typography align='center' color = "error">{errorSearchText}</Typography>}
         </CardSearch>
     )
 }
