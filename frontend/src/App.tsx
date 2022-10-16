@@ -30,10 +30,12 @@ const App = () => {
     )
   }else{
     routes = (
-      <Routes>
-        <Route path="/" element={<LoginPage/>} />
-        <Route path="/*" element={<Navigate to = "/"/>} />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path="/" element={<LoginPage/>} />
+          <Route path="/*" element={<Navigate to = "/"/>} />
+        </Routes>
+      </Container>
     )
   }
 

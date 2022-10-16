@@ -25,7 +25,7 @@ const IframeContainer = styled.div<IframeContainerProps>`
     overflow: hidden;
     width: 100%;
     padding-top: ${props => props.aspectRatioSelected};
-    margin: 20px 0;
+    margin-bottom: 15px;
 
     iframe{
         position: absolute;
