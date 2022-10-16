@@ -1,24 +1,22 @@
-import { Button, Typography } from '@material-ui/core';
+import {Paper } from '@material-ui/core';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { To, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { aspect } from '../../types/AspectRatio';
 import Video from '../../types/Video';
 import ResponsiveVideoIframe from './components/ResponsiveVideoIframe';
+import VideoInfo from './components/VideoInfo';
 import VideoNotFounded from './components/VideoNotFounded';
-import VideoStatistic from './components/VideoStatistic';
 
 const DetailsPage = () => {
   const [video, setVideo] = useState<Video | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { state } = useLocation();
   const { id } = useParams();
 
-  let navigate = useNavigate();
 
   useEffect(() =>{
-    console.log(state?.previousPath)
     const getVideoById = async() =>{
       const response = await axios(`http://localhost:5000/video/${id}`);
       if(response.data && response.data.video){
@@ -33,25 +31,10 @@ const DetailsPage = () => {
   return (
     <>
     {!isLoading && video &&
-      <div>
-        <Typography variant="h4">
-          {video.title}
-        </Typography>
+      <PaperContainerVideo elevation={6}>
         <ResponsiveVideoIframe src = {`https://www.youtube.com/embed/${id}`} aspectRatio={aspect["16:9"]}/>
-          {video.videoStatistics && <VideoStatistic views={video.videoStatistics.views} likes = {video.videoStatistics.likes}/>}
-        <Typography>
-          {video.description}
-        </Typography>
-
-        <Button 
-          onClick={()=> navigate(state?.previousPath ? -1 as To : "/")}
-          color='primary' 
-          variant="contained"
-          style={{marginTop: 20, marginBottom: 20}}
-        >
-          Go Back
-        </Button>
-      </div>
+        <VideoInfo video = {video}/>
+      </PaperContainerVideo>
     }
     {isLoading && <LoadingSpinner color='#3f51b5'/>}
     {!isLoading && !video && (
@@ -60,5 +43,15 @@ const DetailsPage = () => {
     </>
   )
 }
+
+const PaperContainerVideo = styled(Paper)`
+  border-radius: 20px !important;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+
+  iframe{
+    border-radius: 20px 20px 0px 0px;
+  }
+`
 
 export default DetailsPage;
