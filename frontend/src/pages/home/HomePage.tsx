@@ -57,7 +57,7 @@ const HomePage = () => {
           changeToNextPageNumber = {handleChangePage}/>
       }      
       {loading && <LoadingSpinner color='#3f51b5'/>}
-      <Typography align='center' color = "error">{!!error && error}</Typography>
+      {!!error && <Typography align='center' color = "error">{error}</Typography>}
     </div>
   )
 }
