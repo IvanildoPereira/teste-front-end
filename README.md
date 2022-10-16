@@ -1,64 +1,89 @@
-# Teste iCasei: Front-End
-Desenvolver uma aplicação HTML5.
+<h1 align="center">
+    Youtube Consumer
+    Project Portfolio 
+</h1>
+<h4 align="center">
+  A Frontend Project that consume the Youtube API V3.
+</h4>
 
-## Instruções
-- Faça um fork desse projeto para a sua conta pessoal do GitHub, ou BitBucket.
-- Siga as especificações abaixo.
-- Crie um README com as instruções para compilar, testar e rodar o projeto.
-- O link do repositório deverá ser enviado para o e-mail frontend@icasei.com.br com o título **Teste FrontEnd**.
 
-## Especificações tecnicas
-- Ultilizar como sujestão algumas dessas opções para controle de sessão e BFF
-  - [Node.js](https://nodejs.org/en/) 
-  - [Go](https://go.dev/)
-  - [Next.js](https://nextjs.org/)
-  - [Ruby](https://www.ruby-lang.org/pt/)
-  - Qualquer outra linguagem back end também será aceita
-- Utilizar diretrizes do [Google Material Design](https://material.io/develop/web)
-- Utilizar a [API de busca do YouTube](https://developers.google.com/youtube/v3/docs/search/list)
-- Mobile first e responsivo
-- Usar framework JS (React, Vue, Angular ou frameworks relacionados)
-- Cores livres, layout livre, imagens livres
-- Gitflow
-- LESS, SASS ou Styled Components 
+<p align="center">
+  <a href="#computer-features">Features</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
+</p>
 
-## Observações
-- Para consumir os dados desta [API](https://developers.google.com/youtube/v3/docs/search/list), você deve gerar sua api_key de aplicação neste [link](https://developers.google.com/youtube/v3/getting-started?hl=pt-br).
+<p align="center">
+  <img alt="Demo gif" src="./github/demo_video.gif" style="max-width:100%;">  
+</p>
 
-## Especificações funcionais
-### Tela Inicial
 
-Essa tela terá um formulário de login com os campos de nome e e-mail, validar campo de e-mail usando expressão regulares com javascript.
+## :computer: Features
 
-##### OBS: Usuário deve ter acesso a busca de vídeos caso houver sessão criada.
+- Session (Login, Logout)
+- Search Videos
+- Infinity Scroll
+- CSS 3 Animations
+- Video Details and responsive Iframe
 
-### Tela Busca de vídeos
 
-Exibir no header as informações do usuário que consta na sessão por meio de GET no BFF.
+## :rocket: Technologies
 
-Formulário de busca de vídeos posicionado no meio da tela com campo de texto com placeholder "Pesquisar" e um botão "Buscar". Esse formulário deverá ter validação.
+This project was developed to improve my knowledges to become a FullStack Developer and to build this Project I used this technologies:
 
-Essa busca deverá chamar no BFF por meio da url https://www.googleapis.com/youtube/v3/search?part=id,snippet&q={termo_de_busca}&key={API_KEY}
+**BackEnd**
+- [NodeJS](https://nodejs.org)
+- [Express](https://expressjs.com/)
+- [Express-Session](https://www.npmjs.com/package/express-session)
+- [Typescript](https://www.typescriptlang.org/)
+- And another bunch of packages....
 
-Ao fazer a busca, o formulário deve ser movido para o topo da tela usando css animate e mostrar a lista de resultados com os campos título, descrição, thumbnail e um link para a página de detalhes.
 
-Essa página deverá ter paginação com scroll, utilizando os [recursos de paginação da api](https://developers.google.com/youtube/v3/guides/implementation/pagination?hl=pt-br).
+**FrontEnd**
+- [ReactJS](https://reactjs.org/)
+- [React Router Dom](https://reactrouter.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- And another bunch of packages....
 
-### Tela de detalhes
-A partir do videoId retornado na outra chamada, deve ser feito uma chamada para https://www.googleapis.com/youtube/v3/videos?id={VIDEO_ID}&part=snippet,statistics&key={API_KEY}
+## :information_source: How To Use
 
-A partir desse retorno, deve-se montar uma tela contendo embed do video, título, like, deslike, descrição e visualizações.
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js][nodejs] + [NPM][npm] installed on your computer.
+You'll also need to setup the **.env** file, based on a .env.example file that is provided in the backend folder with the Youtube API Key and other informations as the URL of the frontend to handle the Cors. There is **.env** file in the frontend and its contains the variable that you need to fill up to the frontend knows the backend URL.
 
-Essa tela deve ter um botão para voltar, exibindo os últimos resultados da busca com a pagina em questão ativa.
+From your command line:
 
-### Wireframe
-[Wireframe Mobile](https://www.figma.com/proto/8PgmEzgqXUzLufhzExa6S3/teste-frontend?node-id=2%3A237&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A237)
+```bash
+# Clone this repository
+$ git clone https://github.com/IvanildoPereira/teste-front-end.git
 
-[Wireframe Desktop](https://www.figma.com/proto/8PgmEzgqXUzLufhzExa6S3/teste-frontend?node-id=2%3A766&scaling=min-zoom&page-id=2%3A765&starting-point-node-id=2%3A766)
+# Go into the repository
+$ cd teste-front-end
+```
 
-## O que será avaliado?
-- Organização do projeto
-- Lógica do código
-- Uso do Git
-- Componentização
-- Usabilidade/Acessibilidade
+```bash
+# Install dependencies for the backend
+$ cd backend
+$ npm install
+
+# Run the backend server on development environment
+$ npm run start:dev
+```
+
+```bash
+# Install dependencies for the frontend and run the server
+$ cd frontend
+$ npm install
+$ npm start
+```
+
+## :memo: License
+
+This project is under the MIT license.
+
+---
+
+Made with ♥ by Ivanildo Pereira :wave: [Get in touch!](https://www.linkedin.com/in/ivanildopconceicao/)
+
+[nodejs]: https://nodejs.org/
+[npm]: https://www.npmjs.com/
