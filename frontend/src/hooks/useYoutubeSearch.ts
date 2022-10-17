@@ -22,13 +22,16 @@ export default function useYoutubeSearch(query: string, pageNumber: number) {
       method: 'GET',
       url: `${process.env.REACT_APP_BACKEND}/video/all`,
       params: { name: query, nextPageToken, maxResults: 15},
+      withCredentials: true,
       cancelToken: new axios.CancelToken(c => cancel = c)
     }).then(res => {
       if(res.status === 500) throw Error(res.data.error)
-      if(!res.data && !res.data.videos) throw Error("Some problem happens")
-      setVideos((prevVideos: Video[]) => {
-        return [...prevVideos, ...res.data.videos]
-      })
+      if(!res.data) throw Error("Some problem happens")
+      if(res.data.videos){
+        setVideos((prevVideos: Video[]) => {
+          return [...prevVideos, ...res.data.videos]
+        })
+      }
       setNextPageToken(res.data.nextPageToken)
       setLoading(false)
     }).catch(error => {

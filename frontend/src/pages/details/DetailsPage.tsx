@@ -18,7 +18,9 @@ const DetailsPage = () => {
 
   useEffect(() =>{
     const getVideoById = async() =>{
-      const response = await axios(`http://localhost:5000/video/${id}`);
+      const response = await axios(`http://localhost:5000/video/${id}`, {
+        withCredentials: true
+      });
       if(response.data && response.data.video){
         setVideo(response.data.video);
       }
