@@ -6,7 +6,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode> // This is the responsible to the double calls
     <App />
-  </React.StrictMode>
+  //</React.StrictMode>
 );
